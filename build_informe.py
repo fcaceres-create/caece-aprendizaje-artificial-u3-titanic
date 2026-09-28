@@ -60,8 +60,10 @@ def tabla(df, index=True, fmt="{:.3f}"):
 
 # ---------------------------------------------------------------- Portada
 doc.add_heading("Predicción de supervivencia en el Titanic", 0)
-p("Trabajo práctico — Materia: ______________________")
-p("Integrantes: ______________________________________________")
+p("Universidad CAECE", "Institución: ")
+p("Aprendizaje Artificial", "Materia: ")
+p("Fernando Cáceres", "Alumno: ")
+p("Trabajo práctico — Unidad 3")
 p("Herramienta: Python 3 (pandas, scikit-learn, matplotlib/seaborn) en un Jupyter Notebook.")
 
 h("1. Objetivo y planteo del problema")
@@ -209,8 +211,24 @@ p(f"El modelo elegido ({mejor}) se reentrenó con los 891 pasajeros y predijo lo
   f"output/submission.csv tiene el formato que exige Kaggle (PassengerId, Survived); predice que sobrevive el "
   f"{sub.Survived.mean():.0%} de los pasajeros del test, en línea con el 38% del entrenamiento. También se "
   "generaron envíos para regresión logística y Gradient Boosting para compararlos en el leaderboard.")
-p("Es esperable que el puntaje público de Kaggle quede algo por debajo del de validación (típicamente 0,77–0,80 "
-  "para este enfoque), porque el leaderboard se calcula sobre una fracción del test, que es pequeño.")
+
+h("8.1 Resultado en Kaggle", 2)
+p("Se subieron a Kaggle los dos mejores candidatos. El puntaje es la accuracy sobre los 418 pasajeros de test, "
+  "cuyas etiquetas no se conocen durante el desarrollo:")
+tabla(pd.DataFrame([
+    ("Random Forest (max_depth=4, 300 árboles) — elegido", tun.loc["Random Forest", "Acc CV"], ho.loc["Random Forest", "Accuracy"], 0.77751),
+    ("Regresión logística (C=0,1, l2)", tun.loc["Regresión logística", "Acc CV"], ho.loc["Regresión logística", "Accuracy"], 0.77033),
+    ("Base Kaggle 'mujeres viven' (gender_submission.csv)", float("nan"), ho.loc["Base 'mujeres viven'", "Accuracy"], 0.76555),
+], columns=["Modelo", "Acc CV", "Hold-out", "Kaggle"]).set_index("Modelo"), fmt="{:.4f}")
+fig("11_kaggle_score", ancho=15.5, caption="Figura 9. Envíos en Kaggle (pestaña Submissions) con su puntaje.")
+p("El Random Forest, elegido por validación cruzada, también obtuvo el mejor puntaje en Kaggle (0,7775). En el "
+  "hold-out la regresión logística había ganado por poco (0,832 contra 0,827), pero esa ventaja no se sostuvo con "
+  "datos nuevos. Esto respalda decidir por validación cruzada, que promedia 10 particiones, y no por un único "
+  "hold-out de 179 filas. De todos modos la diferencia entre ambos modelos es de 0,0072, es decir 3 pasajeros de "
+  "418: rinden prácticamente igual. Los dos superan la base 'mujeres viven' de Kaggle (0,7656).")
+p("La caída respecto de la validación (≈0,83–0,84 → 0,78) es esperable: el test de Kaggle es otra muestra de "
+  "pasajeros, cada error pesa 0,24 puntos porcentuales, y parte de lo que el modelo aprendió de las 891 filas de "
+  "entrenamiento no se generaliza del todo. Es una estimación más realista del desempeño con datos nuevos.")
 
 h("9. Problemas encontrados y cómo se resolvieron")
 bullets([
@@ -230,14 +248,25 @@ h("10. Conclusiones")
 p("La supervivencia en el Titanic estuvo determinada principalmente por el sexo, la edad (niños) y la clase "
   "socioeconómica, lo que es coherente con el protocolo histórico de \"mujeres y niños primero\" y con el acceso "
   "más fácil a los botes desde las cubiertas superiores. Con una buena ingeniería de variables, modelos "
-  "relativamente simples alcanzan alrededor de 83% de accuracy, unos 4–5 puntos por encima de la regla trivial "
-  "basada sólo en el sexo. Modelos más complejos no mejoraron de forma significativa: con 891 registros el "
+  "relativamente simples alcanzan alrededor de 83% de accuracy en validación, unos 4–5 puntos por encima de la "
+  "regla trivial basada sólo en el sexo, y 77,8% en el test de Kaggle. Modelos más complejos no mejoraron de forma significativa: con 891 registros el "
   "límite lo ponen los datos, no el algoritmo.")
 p("Posibles mejoras: variables de supervivencia por grupo familiar o de ticket (\"si murió el resto de la familia\"), "
   "ensambles de varios modelos (voting/stacking) y validación cruzada repetida para comparar modelos con más precisión.")
 
-h("11. Reproducibilidad")
+h("11. Entregables y enlaces")
 bullets([
+    ("Repositorio (código, datos, notebook, resultados): ", "https://github.com/fcaceres-create/caece-aprendizaje-artificial-u3-titanic"),
+    ("Aplicación interactiva: ", "https://caece-aprendizaje-artificial-u3-titanic.streamlit.app/"),
+    ("Competencia en Kaggle: ", "https://www.kaggle.com/c/titanic"),
+])
+p("Además del notebook se desarrolló una aplicación web en Streamlit que permite explorar los datos, "
+  "activar o desactivar variables, cambiar hiperparámetros de los modelos, comparar corridas y simular la "
+  "probabilidad de supervivencia de un pasajero.")
+
+h("12. Reproducibilidad")
+bullets([
+    "Clonar el repositorio: git clone https://github.com/fcaceres-create/caece-aprendizaje-artificial-u3-titanic",
     "Instalar dependencias: pip install -r requirements.txt",
     "Colocar train.csv y test.csv de Kaggle en la carpeta data/ (ya incluidos).",
     "Ejecutar el notebook titanic.ipynb de principio a fin (o: jupyter nbconvert --to notebook --execute titanic.ipynb).",
@@ -245,5 +274,5 @@ bullets([
     "Opcional: python build_informe.py regenera este documento a partir de los resultados.",
 ])
 
-doc.save("Informe_Titanic.docx")
-print("Informe_Titanic.docx generado")
+doc.save("Informe_Titanic_Fernando_Caceres.docx")
+print("Informe_Titanic_Fernando_Caceres.docx generado")
