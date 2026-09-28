@@ -1,0 +1,5 @@
+Modelo,Accuracy,ROC-AUC
+Regresión logística,0.832,0.867
+Random Forest,0.827,0.847
+Gradient Boosting,0.799,0.842
+Base 'mujeres viven',0.776536312849162,

@@ -1,0 +1,7 @@
+Modelo,Acc train,Acc CV,± desv,AUC CV,F1 CV,Brecha (sobreajuste)
+SVM (RBF),0.849,0.827,0.039,0.872,0.766,0.022
+Regresión logística,0.84,0.822,0.04,0.873,0.764,0.018
+Gradient Boosting,0.916,0.822,0.038,0.889,0.753,0.094
+Random Forest,0.988,0.816,0.022,0.867,0.754,0.172
+KNN (k=7),0.851,0.81,0.032,0.862,0.744,0.041
+Árbol de decisión,0.988,0.791,0.045,0.778,0.726,0.197

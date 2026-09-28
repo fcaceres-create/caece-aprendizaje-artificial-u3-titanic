@@ -1,0 +1,7 @@
+# Versiones probadas con Python 3.12 (streamlit run app/app.py y pytest app/tests)
+streamlit==1.64.0
+scikit-learn==1.9.1
+pandas==3.0.6
+numpy==2.5.3
+plotly==7.1.0
+matplotlib==3.11.2

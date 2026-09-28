@@ -1,0 +1,6 @@
+# Sin "base": la app sigue el modo claro/oscuro del navegador (y el usuario puede cambiarlo en el menú).
+[theme]
+primaryColor = "#2a9d8f"
+
+[browser]
+gatherUsageStats = false
