@@ -17,6 +17,7 @@ python build_informe.py
 Semilla fija (`SEED = 42`): los resultados son idénticos en cada ejecución.
 
 ## App web interactiva ("laboratorio")
+**En vivo:** https://caece-aprendizaje-artificial-u3-titanic.streamlit.app
 En `app/` hay una aplicación Streamlit para experimentar con variables, modelos e hiperparámetros, simular
 pasajeros y generar el envío a Kaggle. Reproduce los resultados del notebook (accuracy CV 0,841, hold-out 0,827).
 ```

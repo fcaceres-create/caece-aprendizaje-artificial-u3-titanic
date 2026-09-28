@@ -1,5 +1,7 @@
 # Laboratorio Titanic (app web)
 
+**En vivo:** https://caece-aprendizaje-artificial-u3-titanic.streamlit.app
+
 Aplicación Streamlit para experimentar con el problema Titanic de Kaggle: explorar los datos, elegir
 variables, entrenar y comparar modelos, interpretarlos, simular pasajeros y generar el envío a Kaggle.
 Reutiliza la lógica de `titanic.ipynb` (misma ingeniería de variables y mismo esquema de evaluación): con
@@ -56,7 +58,7 @@ dormir; se despierta con un clic al visitarla.
 ## 3. Embeberla en una página web
 Agregá `?embed=true` a la URL (oculta el menú y el pie de Streamlit):
 ```html
-<iframe src="https://<mi-app>.streamlit.app/?embed=true" width="100%" height="900"
+<iframe src="https://caece-aprendizaje-artificial-u3-titanic.streamlit.app/?embed=true" width="100%" height="900"
         style="border:none;" title="Laboratorio Titanic"></iframe>
 ```
 Otras opciones: `?embed=true&embed_options=dark_theme` fuerza el modo oscuro y `embed_options=light_theme` el claro.
